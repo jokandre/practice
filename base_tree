@@ -1,0 +1,137 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+def treeNodeToString(root):
+    if not root:
+        return "[]"
+    output = ""
+    queue = [root]
+    current = 0
+    while current != len(queue):
+        node = queue[current]
+        current = current + 1
+
+        if not node:
+            output += "null, "
+            continue
+
+        output += str(node.val) + ", "
+        queue.append(node.left)
+        queue.append(node.right)
+    return "[" + output[:-2] + "]"
+
+def stringToTreeNode(input):
+    input = input.strip()
+    input = input[1:-1]
+    if not input:
+        return None
+
+    inputValues = [s.strip() for s in input.split(',')]
+    root = TreeNode(int(inputValues[0]))
+    nodeQueue = [root]
+    front = 0
+    index = 1
+    while index < len(inputValues):
+        node = nodeQueue[front]
+        front = front + 1
+
+        item = inputValues[index]
+        index = index + 1
+        if item != "null":
+            leftNumber = int(item)
+            node.left = TreeNode(leftNumber)
+            nodeQueue.append(node.left)
+
+        if index >= len(inputValues):
+            break
+
+        item = inputValues[index]
+        index = index + 1
+        if item != "null":
+            rightNumber = int(item)
+            node.right = TreeNode(rightNumber)
+            nodeQueue.append(node.right)
+    return root
+
+def prettyPrintTree(node, prefix="", isLeft=True):
+    if not node:
+        print("Empty Tree")
+        return
+
+    if node.right:
+        prettyPrintTree(node.right, prefix + ("│   " if isLeft else "    "), False)
+
+    print(prefix + ("└── " if isLeft else "┌── ") + str(node.val))
+
+    if node.left:
+        prettyPrintTree(node.left, prefix + ("    " if isLeft else "│   "), True)
+
+def main():
+    import sys
+
+    def readlines():
+        for line in sys.stdin:
+            yield line.strip('\n')
+
+    lines = readlines()
+    while True:
+        try:
+            line = next(lines)
+            node = stringToTreeNode(line)
+            prettyPrintTree(node)
+            result = test1(node)
+            test2(node)
+            print(result)
+        except StopIteration:
+            break
+
+def test1(root:TreeNode):
+    if root is None: return True
+    
+    # Divide tree into 2 sub trees    
+    stack = [(root.left, root.right)]
+    
+    # Traverse
+    while len(stack) > 0:
+        print(stack)
+        pair = stack.pop()
+        left = pair[0]
+        right = pair[1]
+        
+        # Compare the 2 nodes(left, right)
+        # Check cases: 
+        # 1.Both nodes are None; 
+        # 2.Only one node is None;
+        # 3.If no None: compare values;
+        if left is None and right is None:
+            continue
+        if left is None or right is None:
+            return False
+        if left.val == right.val:
+            # Append next child nodes to stack as pairs.
+            stack.append((left.left, right.right))
+            stack.append((left.right, right.left))
+        else:
+            return False
+    return False
+
+
+def test2(root:TreeNode):
+    stack= []
+    if root is None:
+        return 
+    
+    stack.append(root)
+        
+    while 1:
+        curr = stack.pop()
+        if curr.left
+        
+
+if __name__ == '__main__':
+    main()
+    
