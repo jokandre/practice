@@ -26,7 +26,7 @@ class Solution:
             print(node1, node2)
             return False
         if node1 and node2:
-            if not self.recursion(node1.left, node2.right)  or not self.recursion(node1.right, node2.left):
+            if not self.recursion2(node1.left, node2.right)  or not self.recursion2(node1.right, node2.left):
                 return False
             if node1.val != node2.val:
                 return False
