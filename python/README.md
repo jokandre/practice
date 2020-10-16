@@ -1,3 +1,11 @@
+# Python
+Reason:
+- I like the simplicity.
+- Reminds me of C (my first programming language).
+- More popular for AI and data science. 
+    - Did my master thesis with it.
+- Can use it for web backend with Django/Flask framework.
+
 - ### Arrays
     - Implement an automatically resizing vector.
     - [ ] Description:
